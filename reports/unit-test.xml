@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+    <testsuite name="components/__tests__/HelloWorld.spec.ts" timestamp="2024-12-11T02:44:32.105Z" hostname="ip-10-142-85-143.us-west-2.compute.internal" tests="1" failures="0" errors="0" skipped="0" time="0.098">
+        <testcase classname="components/__tests__/HelloWorld.spec.ts" name="HelloWorld &gt; renders properly" time="0.098">
+        </testcase>
+    </testsuite>
+</testsuites>

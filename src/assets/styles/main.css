@@ -1,0 +1,32 @@
+@import "./base.css";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@font-face {
+  font-family: "DragonHunter-Font";
+  src: url("../fonts/MorrisRoman-Black.ttf") format("truetype");
+}
+
+.dragon-font {
+  font-family: "DragonHunter-Font";
+}

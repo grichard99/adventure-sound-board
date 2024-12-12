@@ -1,0 +1,56 @@
+Name: onPushToMainPipeline
+SchemaVersion: "1.0"
+Triggers:
+  - Type: PUSH
+    Branches:
+      - main
+Actions:
+  BuildAndTest:
+    Compute:
+      Type: Lambda
+      Fleet: Linux.x86-64.Large
+    Identifier: aws/build@v1
+    Inputs:
+      Sources:
+        - WorkflowSource
+    Outputs:
+      Artifacts:
+        - Name: build
+          Files:
+            - dist/**/*
+      AutoDiscoverReports:
+        ReportNamePrefix: Test
+        IncludePaths:
+          - coverage/**
+          - reports/**
+    Configuration:
+      Steps:
+        - Run: npm install
+        - Run: "
+
+            \    npm run test:unit -- --reporter=default --reporter=junit --watch=false  --outputFile.junit=../reports/unit-test.xml;
+
+            \    "
+        - Run: npm run build
+  DeployToAmplifyHosting:
+    Compute:
+      Type: Lambda
+      Fleet: Linux.x86-64.Large
+    Identifier: codecatalyst-labs/deploy-to-amplify-hosting@v1
+    DependsOn:
+      - BuildAndTest
+    Inputs:
+      Artifacts:
+        - build
+    Configuration:
+      AppStackName: DevelopmentFrontendStack-d0tv3
+      AmplifyBranchName: ${WorkflowSource.BranchName}
+      AWSRegion: us-west-2
+      Path: dist
+      CreateBranch: true
+      Wait: true
+    Environment:
+      Name: development
+      Connections:
+        - Name: "340752835394"
+          Role: CodeCatalyst-DevRole-Adventure-Sound-Board

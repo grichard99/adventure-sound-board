@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "redhat.vscode-yaml",
+        "amazonwebservices.aws-toolkit-vscode",
+        "vue.volar",
+        "Vue.vscode-typescript-vue-plugin"
+    ]
+}
